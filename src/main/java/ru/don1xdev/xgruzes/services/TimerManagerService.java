@@ -8,11 +8,19 @@ public class TimerManagerService implements ManagerService{
         @Override
         public void run() {
             if (nowVal <= 0) {
-                XGruzes.getGruzesManagerService().
+                XGruzes.getGruzesManagerService().getRandomGruz().spawn();
+                TimerManagerService.this.stop();
             } else nowVal--;
         }
     };
-    private long initVal, nowVal;
+
+    private final long initVal;
+    private long nowVal;
+
+    public TimerManagerService(){
+        this.initVal = XGruzes.getConfiguration().getFileConfiguration().getLong("interval");
+        this.nowVal = this.initVal;
+    }
 
     @Override
     public void start() {
@@ -21,6 +29,11 @@ public class TimerManagerService implements ManagerService{
 
     @Override
     public void stop() {
+        this.nowVal = this.initVal;
+        this.task.cancel();
+    }
 
+    public BukkitRunnable getTask() {
+        return task;
     }
 }

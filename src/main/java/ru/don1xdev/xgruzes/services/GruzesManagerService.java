@@ -4,6 +4,7 @@ import ru.don1xdev.xgruzes.models.gruz.GruzModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class GruzesManagerService implements ManagerService{
     private final List<GruzModel> gruzModels = new ArrayList<>();
@@ -20,5 +21,9 @@ public class GruzesManagerService implements ManagerService{
 
     public List<GruzModel> getGruzModels() {
         return gruzModels;
+    }
+
+    public GruzModel getRandomGruz() {
+        return this.getGruzModels().get(new Random().nextInt(this.getGruzModels().size()));
     }
 }
