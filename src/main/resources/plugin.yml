@@ -1,0 +1,4 @@
+name: xGruzes
+version: '${project.version}'
+main: ru.don1xdev.xgruzes.XGruzes
+api-version: '1.16'
